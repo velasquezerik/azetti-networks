@@ -24,6 +24,58 @@
 
 /***** Functions Definitions **************************************************/
 
-/* EMPTY */
+void User::User()
+{
+	this->uri_ = "";
+	this->name_ = "";
+}
+
+void User::~User()
+{
+	//empty
+}
+
+bool User::isNull()
+{
+	if (this->uri_ == "")
+	{
+		return true;
+	}
+
+	return false;
+}
+
+string User::uri()
+{
+	return this->uri_;
+}
+
+string User::name()
+{
+	return this->name_;
+}
+
+void User::User(string uri)
+{
+	this->uri_ = uri;
+	this->name_ = "";
+}
+
+void User::User(string uri, string name)
+{
+	this->uri_ = uri;
+	this->name_ = name;
+}
+
+int User::status()
+{
+	if (this->isNull())
+	{
+		return User::Status::UNKNOWN;
+	}
+
+	return 1;
+}
+
 
 /***** End Functions Definitions **********************************************/

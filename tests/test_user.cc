@@ -85,7 +85,7 @@ private slots:
 
     /* Equal/not-eqaul operator tests */
 
-    void nullUsersAreEqual() {
+    /*void nullUsersAreEqual() {
         User u1, u2;
         QVERIFY(u1 == u2);
     }
@@ -112,11 +112,11 @@ private slots:
         User u1("sip:bob@example.com", "Robert");
         User u2("sip:rob@example.com", "Robert");
         QVERIFY(!(u1 == u2));
-    }
+    }*/
 
     /* Mutation tests */
 
-    void cannotSetNullUserName() {
+    /*void cannotSetNullUserName() {
         User u;
         u.setName("Alice");
         QCOMPARE(u.name(), "");
@@ -150,11 +150,11 @@ private slots:
         User u("sip:alice@example.com");
         u.setStatus(User::Status::ONLINE);
         QCOMPARE(u.status(), User::Status::ONLINE);
-    }
+    }*/
 
     /* Copy tests */
 
-    void copyOfUserHasSameUri() {
+    /*void copyOfUserHasSameUri() {
         User u1("sip:alice@example.com");
         User u2 = u1;
         QCOMPARE(u2.uri(), "sip:alice@example.com");
@@ -192,11 +192,11 @@ private slots:
         User u2 = u1;
         u2.setStatus(User::Status::ONLINE);
         QCOMPARE(u1.status(), User::Status::ONLINE);
-    }
+    }*/
 
     /* User as contact tests */
 
-    void contactFromUserHasSameUri() {
+    /*void contactFromUserHasSameUri() {
         User u("sip:alice@example.com");
         Contact &c = u;
         QCOMPARE(c.uri(), "sip:alice@example.com");
@@ -220,7 +220,7 @@ private slots:
         Contact &c = u;
         c.setName("Robert");
         QCOMPARE(u.name(), "Robert");
-    }
+    }*/
 };
 
 QTEST_MAIN(TestUser);
