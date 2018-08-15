@@ -3,6 +3,16 @@
  */
 
 #include <QtTest/QtTest>
+#include "user.h"
+#include "group.h"
+#include "contact.h"
+
+QString empty = "";
+QString uriAlice = "sip:alice@example.com";
+QString uriBob = "sip:bob@example.com";
+QString bob = "Bob";
+QString alice = "Alice";
+QString robert = "Robert";
 
 class TestUser : public QObject
 {
@@ -40,12 +50,12 @@ private slots:
 
     void nullUserUriIsEmpty() {
         User u;
-        QCOMPARE(u.uri(), "");
+        QCOMPARE(u.uri(), empty);
     }
 
     void nullUserNameIsEmpty() {
         User u;
-        QCOMPARE(u.name(), "");
+        QCOMPARE(u.name(), empty);
     }
 
     void nullUserStatusIsUnknown() {
@@ -57,22 +67,22 @@ private slots:
 
     void canInitUriWithCtorForeNamelessUser() {
         User u("sip:alice@example.com");
-        QCOMPARE(u.uri(), "sip:alice@example.com");
+        QCOMPARE(u.uri(), uriAlice);
     }
 
     void canInitUriWithCtorForNamedUser() {
         User u("sip:bob@example.com", "Bob");
-        QCOMPARE(u.uri(), "sip:bob@example.com");
+        QCOMPARE(u.uri(), uriBob);
     }
 
     void canInitNameWithCtor() {
         User u("sip:bob@example.com", "Bob");
-        QCOMPARE(u.name(), "Bob");
+        QCOMPARE(u.name(), bob);
     }
 
     void initialNameForNamelessUserIsEmpty() {
         User u("sip:alice@example.com");
-        QCOMPARE(u.name(), "");
+        QCOMPARE(u.name(), empty);
     }
 
     void initialUserStatusIsUnknown() {
@@ -116,7 +126,7 @@ private slots:
     void cannotSetNullUserName() {
         User u;
         u.setName("Alice");
-        QCOMPARE(u.name(), "");
+        QCOMPARE(u.name(), empty);
     }
 
     void cannotSetNullUserStatus() {
@@ -128,13 +138,13 @@ private slots:
     void canChangeUserNameIfWasUnset() {
         User u("sip:alice@example.com");
         u.setName("Alice");
-        QCOMPARE(u.name(), "Alice");
+        QCOMPARE(u.name(), alice);
     }
 
     void canChangeUserNameIfWasSet() {
         User u("sip:bob@example.com", "Bob");
         u.setName("Robert");
-        QCOMPARE(u.name(), "Robert");
+        QCOMPARE(u.name(), robert);
     }
 
     void canChangeUserStatusToOffline() {
@@ -154,27 +164,27 @@ private slots:
     void copyOfUserHasSameUri() {
         User u1("sip:alice@example.com");
         User u2 = u1;
-        QCOMPARE(u2.uri(), "sip:alice@example.com");
+        QCOMPARE(u2.uri(), uriAlice);
     }
 
     void copyOfUserHasSameName() {
         User u1("sip:bob@example.com", "Bob");
         User u2 = u1;
-        QCOMPARE(u2.name(), "Bob");
+        QCOMPARE(u2.name(), bob);
     }
 
     void copyOfUserSharesName1() {
         User u1("sip:bob@example.com", "Bob");
         User u2 = u1;
         u1.setName("Robert");
-        QCOMPARE(u2.name(), "Robert");
+        QCOMPARE(u2.name(), robert);
     }
 
     void copyOfUserSharesName2() {
         User u1("sip:bob@example.com", "Bob");
         User u2 = u1;
         u2.setName("Robert");
-        QCOMPARE(u1.name(), "Robert");
+        QCOMPARE(u1.name(), robert);
     }
 
     void copyOfUserSharesStatus1() {
@@ -196,27 +206,27 @@ private slots:
     void contactFromUserHasSameUri() {
         User u("sip:alice@example.com");
         Contact &c = u;
-        QCOMPARE(c.uri(), "sip:alice@example.com");
+        QCOMPARE(c.uri(), uriAlice);
     }
 
     void contactFromUserHasSameName() {
         User u("sip:bob@example.com", "Bob");
         Contact &c = u;
-        QCOMPARE(c.name(), "Bob");
+        QCOMPARE(c.name(), bob);
     }
 
     void contactFromUserSharesName1() {
         User u("sip:bob@example.com", "Bob");
         Contact &c = u;
         u.setName("Robert");
-        QCOMPARE(c.name(), "Robert");
+        QCOMPARE(c.name(), robert);
     }
 
     void contactFromUserSharesName2() {
         User u("sip:bob@example.com", "Bob");
         Contact &c = u;
         c.setName("Robert");
-        QCOMPARE(u.name(), "Robert");
+        QCOMPARE(u.name(), robert);
     }
 };
 

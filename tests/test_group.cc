@@ -3,6 +3,9 @@
  */
 
 #include <QtTest/QtTest>
+#include "user.h"
+#include "group.h"
+#include "contact.h"
 
 class TestGroup : public QObject
 {
