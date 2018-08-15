@@ -3,9 +3,15 @@
  */
 
 #include <QtTest/QtTest>
-#include "user.h"
 #include "group.h"
-#include "contact.h"
+
+QString empty = "";
+QString uriPolice = "sip:police@example.com";
+QString uriMedics = "sip:medics@example.com";
+QString medics = "Medics";
+QString police = "Police";
+QString robert = "Robert";
+QString paramedics = "Paramedics";
 
 class TestGroup : public QObject
 {
@@ -43,12 +49,12 @@ private slots:
 
     void nullGroupUriIsEmpty() {
         Group g;
-        QCOMPARE(g.uri(), "");
+        QCOMPARE(g.uri(), empty);
     }
 
     void nullGroupNameIsEmpty() {
         Group g;
-        QCOMPARE(g.name(), "");
+        QCOMPARE(g.name(), empty);
     }
 
     void nullGroupStatusHasNoUsers() {
@@ -60,22 +66,22 @@ private slots:
 
     void canInitUriWithCtorForeNamelessGroup() {
         Group g("sip:police@example.com");
-        QCOMPARE(g.uri(), "sip:police@example.com");
+        QCOMPARE(g.uri(), uriPolice);
     }
 
     void canInitUriWithCtorForNamedGroup() {
         Group g("sip:medics@example.com", "Medics");
-        QCOMPARE(g.uri(), "sip:medics@example.com");
+        QCOMPARE(g.uri(), uriMedics);
     }
 
     void canInitNameWithCtor() {
         Group g("sip:medics@example.com", "Medics");
-        QCOMPARE(g.name(), "Medics");
+        QCOMPARE(g.name(), medics);
     }
 
     void initialNameForNamelessGroupIsEmpty() {
         Group g("sip:police@example.com");
-        QCOMPARE(g.name(), "");
+        QCOMPARE(g.name(), empty);
     }
 
     void initialGroupCountIsZero() {
@@ -119,19 +125,19 @@ private slots:
     void cannotSetNullGroupName() {
         Group u;
         u.setName("Police");
-        QCOMPARE(u.name(), "");
+        QCOMPARE(u.name(), empty);
     }
 
     void canChangeGroupNameIfWasUnset() {
         Group u("sip:police@example.com");
         u.setName("Police");
-        QCOMPARE(u.name(), "Police");
+        QCOMPARE(u.name(), police);
     }
 
     void canChangeGroupNameIfWasSet() {
         Group u("sip:bob@example.com", "Bob");
         u.setName("Robert");
-        QCOMPARE(u.name(), "Robert");
+        QCOMPARE(u.name(), robert);
     }
 
     void cannotAddUserToNullGroup() {
@@ -223,27 +229,27 @@ private slots:
     void copyOfGroupHasSameUri() {
         Group g1("sip:police@example.com");
         Group g2 = g1;
-        QCOMPARE(g2.uri(), "sip:police@example.com");
+        QCOMPARE(g2.uri(), uriPolice);
     }
 
     void copyOfGroupHasSameName() {
         Group g1("sip:medics@example.com", "Medics");
         Group g2 = g1;
-        QCOMPARE(g2.name(), "Medics");
+        QCOMPARE(g2.name(), medics);
     }
 
     void copyOfGroupSharesName1() {
         Group g1("sip:medics@example.com", "Medics");
         Group g2 = g1;
         g1.setName("Paramedics");
-        QCOMPARE(g2.name(), "Paramedics");
+        QCOMPARE(g2.name(), paramedics);
     }
 
     void copyOfGroupSharesName2() {
         Group g1("sip:medics@example.com", "Medics");
         Group g2 = g1;
         g2.setName("Robert");
-        QCOMPARE(g1.name(), "Robert");
+        QCOMPARE(g1.name(), robert);
     }
 
     void copyOfGroupSharesUsers1() {
@@ -273,27 +279,27 @@ private slots:
     void contactFromGroupHasSameUri() {
         Group g("sip:police@example.com");
         Contact &c = g;
-        QCOMPARE(c.uri(), "sip:police@example.com");
+        QCOMPARE(c.uri(), uriPolice);
     }
 
     void contactFromGroupHasSameName() {
         Group g("sip:Police@example.com", "Police");
         Contact &c = g;
-        QCOMPARE(c.name(), "Police");
+        QCOMPARE(c.name(), police);
     }
 
     void contactFromGroupSharesName1() {
         Group g("sip:medics@example.com", "Medics");
         Contact &c = g;
         g.setName("Paramedics");
-        QCOMPARE(c.name(), "Paramedics");
+        QCOMPARE(c.name(), paramedics);
     }
 
     void contactFromGroupSharesName2() {
         Group g("sip:medics@example.com", "Medics");
         Contact &c = g;
         c.setName("Paramedics");
-        QCOMPARE(g.name(), "Paramedics");
+        QCOMPARE(g.name(), paramedics);
     }
 };
 

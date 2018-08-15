@@ -4,8 +4,6 @@
 
 #include <QtTest/QtTest>
 #include "user.h"
-#include "group.h"
-#include "contact.h"
 
 QString empty = "";
 QString uriAlice = "sip:alice@example.com";
