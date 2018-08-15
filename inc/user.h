@@ -26,7 +26,7 @@ using namespace std;
 
 /* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Local Headers >>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
 
-/* EMPTY */
+#include "contact.h"
 
 /*****************************    Definitions    ******************************/
 
@@ -57,32 +57,30 @@ using namespace std;
 
 /***************************    Class Definitions   **************************/
 
-class User
+class User : public Contact
 {
-
-	private:
-		string uri_;
-		string name_;
+		
 	public:
-		enum class Status { UNKNOWN, Hearts, Clubs, Spades };
 
+		enum class Status { UNKNOWN, ONLINE, OFFLINE };
+		Status * status_;
 		User();
 		~User();
-		User(string uri );
-		User(string uri, string name);
+		User(QString uri );
+		User(QString uri, QString name);
+		User(User & user);
 
 		bool isNull();
-		string uri();
-		string name();
+		QString uri();
+		QString name();
 		User::Status status();
+		void setName(QString name);
+		void setUri(QString uri);
+		void setStatus(Status status);
 
 		bool operator == (User & user)
 		{
-			if(this->uri_ != user.uri())
-			{
-				return false;
-			}
-			if(this->name_ != user.name())
+			if(*this->uri_ != user.uri())
 			{
 				return false;
 			}
@@ -90,8 +88,9 @@ class User
 		};
 		User & operator = ( User & user)
 		{
-			this->uri_ = user.uri();
-			this->name_ = user.name();
+			this->uri_ = user.uri_;
+			this->name_ = user.name_;
+			this->status_ = user.status_;
 			return *this;
 		};
 
@@ -99,22 +98,27 @@ class User
 		{
 			return !(*this == user);
 		};
+
+		
 };
 
 User::User()
 {
-	this->uri_ = "";
-	this->name_ = "";
+	this->uri_ = new QString("");
+	this->name_ = new QString("");
+	this->status_ = new Status(Status::UNKNOWN);
 }
 
 User::~User()
 {
-	//empty
+	//delete uri_;
+	//delete name_;
+	//delete status_;
 }
 
 bool User::isNull()
 {
-	if (this->uri_ == "")
+	if (*this->uri_ == "")
 	{
 		return true;
 	}
@@ -122,36 +126,93 @@ bool User::isNull()
 	return false;
 }
 
-string User::uri()
+QString User::uri()
 {
-	return this->uri_;
+	return *this->uri_;
 }
 
-string User::name()
+QString User::name()
 {
-	return this->name_;
+	return *this->name_;
 }
 
-User::User(string uri)
+User::User(QString uri)
 {
-	this->uri_ = uri;
-	this->name_ = "";
+	if (uri != "")
+	{
+		this->uri_ = new QString(uri);
+		this->name_ = new QString("");
+		this->status_ = new Status(Status::UNKNOWN);
+	}
+	else
+	{
+		this->uri_ = new QString("");
+		this->name_ = new QString("");
+		this->status_ = new Status(Status::UNKNOWN);
+	}
+	
 }
 
-User::User(string uri, string name)
+User::User(QString uri, QString name)
 {
-	this->uri_ = uri;
-	this->name_ = name;
+	if (uri != "")
+	{
+		this->uri_ = new QString(uri);
+		this->name_ = new QString(name);
+		this->status_ = new Status(Status::UNKNOWN);
+	}
+	else
+	{
+		this->uri_ = new QString("");
+		this->name_ = new QString(name);
+		this->status_ = new Status(Status::UNKNOWN);
+	}
+}
+
+User::User(User & user)
+{
+	this->uri_ = user.uri_;
+	this->name_ = user.name_;
+	this->status_ = user.status_;
 }
 
 User::Status User::status()
 {
 	if (this->isNull())
 	{
-		return User::Status::UNKNOWN;
+		return Status::UNKNOWN;
 	}
 
-	return User::Status::UNKNOWN;
+	return *this->status_;
+}
+
+void User::setName(QString name)
+{
+	if (this->isNull())
+	{
+		*this->name_ = "";
+	}
+	else
+	{
+		*this->name_ = name;
+	}
+
+}
+void User::setUri(QString uri)
+{
+	*this->uri_ = uri;
+}
+void User::setStatus(Status status)
+{
+	if (this->isNull())
+	{
+		*this->status_ = Status::UNKNOWN;
+	}
+	else
+	{
+		*this->status_ = status;
+	}
+
 }
 
 

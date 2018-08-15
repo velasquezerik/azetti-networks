@@ -4,7 +4,4 @@ set(SOURCES
 	contact.cpp
 )
 
-set(HEADERS
-	#
-)
 
