@@ -55,132 +55,50 @@
 
 /***************************    Class Definitions   **************************/
 
+/*****************************************************************************
+*   Contact Class
+*
+*   Class that models the Contact needed for the network
+*
+* Revision History:
+*   2018-June-15: Erik Velasquez
+*                  - Class creation
+*****************************************************************************/
 class Contact
 {
 		
 	public:
-		std::string * uri_;
-		std::string * name_;
-		Contact();
-		~Contact();
-		Contact(std::string uri );
-		Contact(std::string uri, std::string name);
-		Contact(Contact & contact);
 
-		bool isNull();
-		std::string uri();
-		std::string name();
-		void setName(std::string name);
-		void setUri(std::string uri);
+		/*Members*/
+			std::string * uri_;
+			std::string * name_;
 
-		bool operator == (Contact & contact)
-		{
-			if(*this->uri_ != contact.uri())
-			{
-				return false;
-			}
-			return true;
-		};
-		Contact & operator = ( Contact & contact)
-		{
-			this->uri_ = contact.uri_;
-			this->name_ = contact.name_;
-			return *this;
-		};
+		/* Constructor */
+			Contact();
+			Contact(std::string uri );
+			Contact(std::string uri, std::string name);
+			Contact(Contact & contact);
 
-		bool operator != ( Contact & contact)
-		{
-			return !(*this == contact);
-		};
+		/* Destructor*/
+			~Contact();
+
+
+		/* Access methods */
+			bool isNull();
+			std::string uri();
+			std::string name();
+
+		/* Modifications methods */
+			void setName(std::string name);
+			void setUri(std::string uri);
+
+		/* Operators */
+			bool operator == (Contact & contact);
+			Contact & operator = ( Contact & contact);
+			bool operator != ( Contact & contact);
 
 		
-};
-
-Contact::Contact()
-{
-	this->uri_ = new std::string("");
-	this->name_ = new std::string("");
-}
-
-Contact::~Contact()
-{
-	//delete uri_;
-	//delete name_;
-}
-
-bool Contact::isNull()
-{
-	if (*this->uri_ == "")
-	{
-		return true;
-	}
-
-	return false;
-}
-
-std::string Contact::uri()
-{
-	return *this->uri_;
-}
-
-std::string Contact::name()
-{
-	return *this->name_;
-}
-
-Contact::Contact(std::string uri)
-{
-	if (uri != "")
-	{
-		this->uri_ = new std::string(uri);
-		this->name_ = new std::string("");
-	}
-	else
-	{
-		this->uri_ = new std::string("");
-		this->name_ = new std::string("");
-	}
-	
-}
-
-Contact::Contact(std::string uri, std::string name)
-{
-	if (uri != "")
-	{
-		this->uri_ = new std::string(uri);
-		this->name_ = new std::string(name);
-	}
-	else
-	{
-		this->uri_ = new std::string("");
-		this->name_ = new std::string(name);
-	}
-}
-
-Contact::Contact(Contact & contact)
-{
-	this->uri_ = contact.uri_;
-	this->name_ = contact.name_;
-}
-
-
-void Contact::setName(std::string name)
-{
-	if (this->isNull())
-	{
-		*this->name_ = "";
-	}
-	else
-	{
-		*this->name_ = name;
-	}
-
-}
-void Contact::setUri(std::string uri)
-{
-	*this->uri_ = uri;
-}
-
+}; /* End Class Definition */
 
 
 /*********************    End of Class Definitions    ************************/

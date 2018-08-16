@@ -24,6 +24,15 @@
 
 /***** Functions Definitions **************************************************/
 
+/******************************************************************************
+*   Group
+*
+*   Description: Constructor
+*
+* Revision History:
+*   2018-Aug-15: Erik Velásquez
+*                  - Method creation
+******************************************************************************/
 Group::Group()
 {
 	this->uri_ = new std::string("");
@@ -32,11 +41,30 @@ Group::Group()
 	*numUsers = 0;
 	listUsers = new User[MAX];
 }
+
+/******************************************************************************
+*   ~Group
+*
+*   Description: Destructor
+*
+* Revision History:
+*   2018-Aug-15: Erik Velásquez
+*                  - Method creation
+******************************************************************************/
 Group::~Group()
 {
 	//EMPTY
 }
 
+/******************************************************************************
+*   Group
+*
+*   Description: Constructor
+*
+* Revision History:
+*   2018-Aug-15: Erik Velásquez
+*                  - Method creation
+******************************************************************************/
 Group::Group(std::string uri)
 {
 	if (uri != "")
@@ -58,6 +86,15 @@ Group::Group(std::string uri)
 	
 }
 
+/******************************************************************************
+*   Group
+*
+*   Description: Constructor
+*
+* Revision History:
+*   2018-Aug-15: Erik Velásquez
+*                  - Method creation
+******************************************************************************/
 Group::Group(std::string uri, std::string name)
 {
 	if (uri != "")
@@ -78,6 +115,15 @@ Group::Group(std::string uri, std::string name)
 	}
 }
 
+/******************************************************************************
+*   Group
+*
+*   Description: Constructor
+*
+* Revision History:
+*   2018-Aug-15: Erik Velásquez
+*                  - Method creation
+******************************************************************************/
 Group::Group(Group & group)
 {
 	this->uri_ = group.uri_;
@@ -86,6 +132,15 @@ Group::Group(Group & group)
 	listUsers = group.listUsers;
 }
 
+/******************************************************************************
+*   isNull
+*
+*   Description: return Null group
+*
+* Revision History:
+*   2018-Aug-15: Erik Velásquez
+*                  - Method creation
+******************************************************************************/
 bool Group::isNull()
 {
 	if (*this->uri_ == "")
@@ -96,22 +151,57 @@ bool Group::isNull()
 	return false;
 }
 
+/******************************************************************************
+*   uri
+*
+*   Description: return uri
+*
+* Revision History:
+*   2018-Aug-15: Erik Velásquez
+*                  - Method creation
+******************************************************************************/
 std::string Group::uri()
 {
 	return *this->uri_;
 }
 
+/******************************************************************************
+*   name
+*
+*   Description: return name
+*
+* Revision History:
+*   2018-Aug-15: Erik Velásquez
+*                  - Method creation
+******************************************************************************/
 std::string Group::name()
 {
 	return *this->name_;
 }
 
+/******************************************************************************
+*   count
+*
+*   Description: return number of users
+*
+* Revision History:
+*   2018-Aug-15: Erik Velásquez
+*                  - Method creation
+******************************************************************************/
 int Group::count()
 {
 	return *numUsers;
 }
 
-
+/******************************************************************************
+*   operator ==
+*
+*   Description: Operator
+*
+* Revision History:
+*   2018-Aug-15: Erik Velásquez
+*                  - Method creation
+******************************************************************************/
 bool Group::operator == (Group & group)
 {
 	if(*this->uri_ != group.uri())
@@ -121,6 +211,15 @@ bool Group::operator == (Group & group)
 	return true;
 }
 
+/******************************************************************************
+*   operator =
+*
+*   Description: Operator
+*
+* Revision History:
+*   2018-Aug-15: Erik Velásquez
+*                  - Method creation
+******************************************************************************/
 Group & Group::operator = ( Group & group)
 {
 	this->uri_ = group.uri_;
@@ -128,13 +227,31 @@ Group & Group::operator = ( Group & group)
 	this->numUsers = group.numUsers;
 	this->listUsers = group.listUsers;
 	return *this;
-};
+}
 
+/******************************************************************************
+*   operator !=
+*
+*   Description: Operator
+*
+* Revision History:
+*   2018-Aug-15: Erik Velásquez
+*                  - Method creation
+******************************************************************************/
 bool Group::operator != ( Group & group)
 {
 	return !(*this == group);
-};
+}
 
+/******************************************************************************
+*   add
+*
+*   Description: add user to group
+*
+* Revision History:
+*   2018-Aug-15: Erik Velásquez
+*                  - Method creation
+******************************************************************************/
 void Group::add(User & user)
 {
 	if (this->isNull())
@@ -183,6 +300,16 @@ void Group::add(User & user)
 	}
 
 }
+
+/******************************************************************************
+*   remove
+*
+*   Description: remove user from group
+*
+* Revision History:
+*   2018-Aug-15: Erik Velásquez
+*                  - Method creation
+******************************************************************************/
 void Group::remove(User & user)
 {
 	int pos = -1;
@@ -213,6 +340,16 @@ void Group::remove(User & user)
 		}
 	}
 }
+
+/******************************************************************************
+*   contains
+*
+*   Description: return if user exist
+*
+* Revision History:
+*   2018-Aug-15: Erik Velásquez
+*                  - Method creation
+******************************************************************************/
 bool Group::contains(User & user)
 {
 	for (int i = 0; i < *numUsers; ++i)
@@ -227,6 +364,15 @@ bool Group::contains(User & user)
 
 }
 
+/******************************************************************************
+*   setName
+*
+*   Description: set name
+*
+* Revision History:
+*   2018-Aug-15: Erik Velásquez
+*                  - Method creation
+******************************************************************************/
 void Group::setName(std::string name)
 {
 	if (this->isNull())
