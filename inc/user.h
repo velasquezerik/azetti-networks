@@ -17,9 +17,7 @@
 /* >>>>>>>>>>>>>>>>>>>>>>>> Standard C/C++ Libraries >>>>>>>>>>>>>>>>>>>>>>>> */
 
 #include <iostream>
-#include <QtTest/QtTest>
 
-using namespace std;
 /* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>> POSIX Headers >>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
 
 /* EMPTY */
@@ -57,163 +55,54 @@ using namespace std;
 
 /***************************    Class Definitions   **************************/
 
+/*****************************************************************************
+*   User Class
+*
+*   Class that models the User needed for the network
+*
+* Revision History:
+*   2018-June-15: Erik Velasquez
+*                  - Class creation
+*****************************************************************************/
 class User : public Contact
 {
 		
 	public:
 
-		enum class Status { UNKNOWN, ONLINE, OFFLINE };
-		Status * status_;
-		User();
-		~User();
-		User(QString uri );
-		User(QString uri, QString name);
-		User(User & user);
+		/*Members*/
 
-		bool isNull();
-		QString uri();
-		QString name();
-		User::Status status();
-		void setName(QString name);
-		void setUri(QString uri);
-		void setStatus(Status status);
+			/* Enum Class for status*/
+			enum class Status { UNKNOWN, ONLINE, OFFLINE };
+			/* User Status*/
+			Status * status_;
 
-		bool operator == (User & user)
-		{
-			if(*this->uri_ != user.uri())
-			{
-				return false;
-			}
-			return true;
-		};
-		User & operator = ( User & user)
-		{
-			this->uri_ = user.uri_;
-			this->name_ = user.name_;
-			this->status_ = user.status_;
-			return *this;
-		};
+		/* Constructor */
+			User();
+			User(std::string uri );
+			User(std::string uri, std::string name);
+			User(User & user);
+		/* Destructor*/
+			~User();
+		
 
-		bool operator != ( User & user)
-		{
-			return !(*this == user);
-		};
+		/* Access methods */
+			bool isNull();
+			std::string uri();
+			std::string name();
+			User::Status status();
+			
+		/* Modifications methods */
+			void setName(std::string name);
+			void setUri(std::string uri);
+			void setStatus(Status status);
+
+		/* Operators */
+			bool operator == (User & user);
+			User & operator = ( User & user);
+			bool operator != ( User & user);
 
 		
-};
-
-User::User()
-{
-	this->uri_ = new QString("");
-	this->name_ = new QString("");
-	this->status_ = new Status(Status::UNKNOWN);
-}
-
-User::~User()
-{
-	//delete uri_;
-	//delete name_;
-	//delete status_;
-}
-
-bool User::isNull()
-{
-	if (*this->uri_ == "")
-	{
-		return true;
-	}
-
-	return false;
-}
-
-QString User::uri()
-{
-	return *this->uri_;
-}
-
-QString User::name()
-{
-	return *this->name_;
-}
-
-User::User(QString uri)
-{
-	if (uri != "")
-	{
-		this->uri_ = new QString(uri);
-		this->name_ = new QString("");
-		this->status_ = new Status(Status::UNKNOWN);
-	}
-	else
-	{
-		this->uri_ = new QString("");
-		this->name_ = new QString("");
-		this->status_ = new Status(Status::UNKNOWN);
-	}
-	
-}
-
-User::User(QString uri, QString name)
-{
-	if (uri != "")
-	{
-		this->uri_ = new QString(uri);
-		this->name_ = new QString(name);
-		this->status_ = new Status(Status::UNKNOWN);
-	}
-	else
-	{
-		this->uri_ = new QString("");
-		this->name_ = new QString(name);
-		this->status_ = new Status(Status::UNKNOWN);
-	}
-}
-
-User::User(User & user)
-{
-	this->uri_ = user.uri_;
-	this->name_ = user.name_;
-	this->status_ = user.status_;
-}
-
-User::Status User::status()
-{
-	if (this->isNull())
-	{
-		return Status::UNKNOWN;
-	}
-
-	return *this->status_;
-}
-
-void User::setName(QString name)
-{
-	if (this->isNull())
-	{
-		*this->name_ = "";
-	}
-	else
-	{
-		*this->name_ = name;
-	}
-
-}
-void User::setUri(QString uri)
-{
-	*this->uri_ = uri;
-}
-void User::setStatus(Status status)
-{
-	if (this->isNull())
-	{
-		*this->status_ = Status::UNKNOWN;
-	}
-	else
-	{
-		*this->status_ = status;
-	}
-
-}
+}; /* End Class Definition */
 
 
 /*********************    End of Class Definitions    ************************/
