@@ -17,9 +17,7 @@
 /* >>>>>>>>>>>>>>>>>>>>>>>> Standard C/C++ Libraries >>>>>>>>>>>>>>>>>>>>>>>> */
 
 #include <iostream>
-#include <QtTest/QtTest>
 
-using namespace std;
 /* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>> POSIX Headers >>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
 
 /* EMPTY */
@@ -66,16 +64,16 @@ class User : public Contact
 		Status * status_;
 		User();
 		~User();
-		User(QString uri );
-		User(QString uri, QString name);
+		User(std::string uri );
+		User(std::string uri, std::string name);
 		User(User & user);
 
 		bool isNull();
-		QString uri();
-		QString name();
+		std::string uri();
+		std::string name();
 		User::Status status();
-		void setName(QString name);
-		void setUri(QString uri);
+		void setName(std::string name);
+		void setUri(std::string uri);
 		void setStatus(Status status);
 
 		bool operator == (User & user)
@@ -104,8 +102,8 @@ class User : public Contact
 
 User::User()
 {
-	this->uri_ = new QString("");
-	this->name_ = new QString("");
+	this->uri_ = new std::string("");
+	this->name_ = new std::string("");
 	this->status_ = new Status(Status::UNKNOWN);
 }
 
@@ -126,45 +124,45 @@ bool User::isNull()
 	return false;
 }
 
-QString User::uri()
+std::string User::uri()
 {
 	return *this->uri_;
 }
 
-QString User::name()
+std::string User::name()
 {
 	return *this->name_;
 }
 
-User::User(QString uri)
+User::User(std::string uri)
 {
 	if (uri != "")
 	{
-		this->uri_ = new QString(uri);
-		this->name_ = new QString("");
+		this->uri_ = new std::string(uri);
+		this->name_ = new std::string("");
 		this->status_ = new Status(Status::UNKNOWN);
 	}
 	else
 	{
-		this->uri_ = new QString("");
-		this->name_ = new QString("");
+		this->uri_ = new std::string("");
+		this->name_ = new std::string("");
 		this->status_ = new Status(Status::UNKNOWN);
 	}
 	
 }
 
-User::User(QString uri, QString name)
+User::User(std::string uri, std::string name)
 {
 	if (uri != "")
 	{
-		this->uri_ = new QString(uri);
-		this->name_ = new QString(name);
+		this->uri_ = new std::string(uri);
+		this->name_ = new std::string(name);
 		this->status_ = new Status(Status::UNKNOWN);
 	}
 	else
 	{
-		this->uri_ = new QString("");
-		this->name_ = new QString(name);
+		this->uri_ = new std::string("");
+		this->name_ = new std::string(name);
 		this->status_ = new Status(Status::UNKNOWN);
 	}
 }
@@ -186,7 +184,7 @@ User::Status User::status()
 	return *this->status_;
 }
 
-void User::setName(QString name)
+void User::setName(std::string name)
 {
 	if (this->isNull())
 	{
@@ -198,7 +196,7 @@ void User::setName(QString name)
 	}
 
 }
-void User::setUri(QString uri)
+void User::setUri(std::string uri)
 {
 	*this->uri_ = uri;
 }

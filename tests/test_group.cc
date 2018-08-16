@@ -5,13 +5,13 @@
 #include <QtTest/QtTest>
 #include "group.h"
 
-QString empty = "";
-QString uriPolice = "sip:police@example.com";
-QString uriMedics = "sip:medics@example.com";
-QString medics = "Medics";
-QString police = "Police";
-QString robert = "Robert";
-QString paramedics = "Paramedics";
+std::string empty = "";
+std::string uriPolice = "sip:police@example.com";
+std::string uriMedics = "sip:medics@example.com";
+std::string medics = "Medics";
+std::string police = "Police";
+std::string robert = "Robert";
+std::string paramedics = "Paramedics";
 
 class TestGroup : public QObject
 {

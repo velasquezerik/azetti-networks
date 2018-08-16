@@ -17,10 +17,6 @@
 /* >>>>>>>>>>>>>>>>>>>>>>>> Standard C/C++ Libraries >>>>>>>>>>>>>>>>>>>>>>>> */
 
 #include <iostream>
-#include <QtTest/QtTest>
-#include <vector>
-
-using namespace std;
 
 /* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>> POSIX Headers >>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
 
@@ -68,73 +64,54 @@ class Group : public Contact
 
 		Group();
 		~Group();
-		Group(QString uri );
-		Group(QString uri, QString name);
+		Group(std::string uri );
+		Group(std::string uri, std::string name);
 		Group(Group & group);
 
 		bool isNull();
-		QString uri();
-		QString name();
+		std::string uri();
+		std::string name();
 		int count();
 
-		bool operator == (Group & group)
-		{
-			if(*this->uri_ != group.uri())
-			{
-				return false;
-			}
-			return true;
-		};
-
-		Group & operator = ( Group & group)
-		{
-			this->uri_ = group.uri_;
-			this->name_ = group.name_;
-			this->numUsers = group.numUsers;
-			this->listUsers = group.listUsers;
-			return *this;
-		};
-
-		bool operator != ( Group & group)
-		{
-			return !(*this == group);
-		};
+		bool operator == (Group & group);
+		Group & operator = ( Group & group);
+		bool operator != ( Group & group);
 
 		void add(User & user);
 		void remove(User & user);
 		bool contains(User & user);
-		void setName(QString name);
+		void setName(std::string name);
 
 
 };
 
-Group::Group()
+/*Group::Group()
 {
-	this->uri_ = new QString("");
-	this->name_ = new QString("");
+	this->uri_ = new std::string("");
+	this->name_ = new std::string("");
 	numUsers = new int;
 	*numUsers = 0;
 	listUsers = new User[MAX];
 }
 Group::~Group()
 {
-	/*EMPTY*/
+	//EMPTY
 }
 
-Group::Group(QString uri)
+Group::Group(std::string uri)
 {
 	if (uri != "")
 	{
-		this->uri_ = new QString(uri);
-		this->name_ = new QString("");
+		this->uri_ = new std::string(uri);
+		this->name_ = new std::string("");
 		numUsers = new int;
 		*numUsers = 0;
 		listUsers = new User[MAX];
 	}
 	else
 	{
-		this->uri_ = new QString("");
-		this->name_ = new QString("");
+		this->uri_ = new std::string("");
+		this->name_ = new std::string("");
 		numUsers = new int;
 		*numUsers = 0;
 		listUsers = new User[MAX];
@@ -142,20 +119,20 @@ Group::Group(QString uri)
 	
 }
 
-Group::Group(QString uri, QString name)
+Group::Group(std::string uri, std::string name)
 {
 	if (uri != "")
 	{
-		this->uri_ = new QString(uri);
-		this->name_ = new QString(name);
+		this->uri_ = new std::string(uri);
+		this->name_ = new std::string(name);
 		numUsers = new int;
 		*numUsers = 0;
 		listUsers = new User[MAX];
 	}
 	else
 	{
-		this->uri_ = new QString("");
-		this->name_ = new QString(name);
+		this->uri_ = new std::string("");
+		this->name_ = new std::string(name);
 		numUsers = new int;
 		*numUsers = 0;
 		listUsers = new User[MAX];
@@ -180,12 +157,12 @@ bool Group::isNull()
 	return false;
 }
 
-QString Group::uri()
+std::string Group::uri()
 {
 	return *this->uri_;
 }
 
-QString Group::name()
+std::string Group::name()
 {
 	return *this->name_;
 }
@@ -195,6 +172,29 @@ int Group::count()
 	return *numUsers;
 }
 
+
+bool Group::operator == (Group & group)
+{
+	if(*this->uri_ != group.uri())
+	{
+		return false;
+	}
+	return true;
+}
+
+Group & Group::operator = ( Group & group)
+{
+	this->uri_ = group.uri_;
+	this->name_ = group.name_;
+	this->numUsers = group.numUsers;
+	this->listUsers = group.listUsers;
+	return *this;
+};
+
+bool Group::operator != ( Group & group)
+{
+	return !(*this == group);
+};
 
 void Group::add(User & user)
 {
@@ -288,7 +288,7 @@ bool Group::contains(User & user)
 
 }
 
-void Group::setName(QString name)
+void Group::setName(std::string name)
 {
 	if (this->isNull())
 	{
@@ -299,7 +299,7 @@ void Group::setName(QString name)
 		*this->name_ = name;
 	}
 
-}
+}*/
 
 /*********************    End of Class Definitions    ************************/
 

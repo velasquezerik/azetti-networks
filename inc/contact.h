@@ -17,7 +17,6 @@
 /* >>>>>>>>>>>>>>>>>>>>>>>> Standard C/C++ Libraries >>>>>>>>>>>>>>>>>>>>>>>> */
 
 #include <iostream>
-#include <QtTest/QtTest>
 
 /* >>>>>>>>>>>>>>>>>>>>>>>>>>>>>> POSIX Headers >>>>>>>>>>>>>>>>>>>>>>>>>>>>> */
 
@@ -60,19 +59,19 @@ class Contact
 {
 		
 	public:
-		QString * uri_;
-		QString * name_;
+		std::string * uri_;
+		std::string * name_;
 		Contact();
 		~Contact();
-		Contact(QString uri );
-		Contact(QString uri, QString name);
+		Contact(std::string uri );
+		Contact(std::string uri, std::string name);
 		Contact(Contact & contact);
 
 		bool isNull();
-		QString uri();
-		QString name();
-		void setName(QString name);
-		void setUri(QString uri);
+		std::string uri();
+		std::string name();
+		void setName(std::string name);
+		void setUri(std::string uri);
 
 		bool operator == (Contact & contact)
 		{
@@ -99,8 +98,8 @@ class Contact
 
 Contact::Contact()
 {
-	this->uri_ = new QString("");
-	this->name_ = new QString("");
+	this->uri_ = new std::string("");
+	this->name_ = new std::string("");
 }
 
 Contact::~Contact()
@@ -119,42 +118,42 @@ bool Contact::isNull()
 	return false;
 }
 
-QString Contact::uri()
+std::string Contact::uri()
 {
 	return *this->uri_;
 }
 
-QString Contact::name()
+std::string Contact::name()
 {
 	return *this->name_;
 }
 
-Contact::Contact(QString uri)
+Contact::Contact(std::string uri)
 {
 	if (uri != "")
 	{
-		this->uri_ = new QString(uri);
-		this->name_ = new QString("");
+		this->uri_ = new std::string(uri);
+		this->name_ = new std::string("");
 	}
 	else
 	{
-		this->uri_ = new QString("");
-		this->name_ = new QString("");
+		this->uri_ = new std::string("");
+		this->name_ = new std::string("");
 	}
 	
 }
 
-Contact::Contact(QString uri, QString name)
+Contact::Contact(std::string uri, std::string name)
 {
 	if (uri != "")
 	{
-		this->uri_ = new QString(uri);
-		this->name_ = new QString(name);
+		this->uri_ = new std::string(uri);
+		this->name_ = new std::string(name);
 	}
 	else
 	{
-		this->uri_ = new QString("");
-		this->name_ = new QString(name);
+		this->uri_ = new std::string("");
+		this->name_ = new std::string(name);
 	}
 }
 
@@ -165,7 +164,7 @@ Contact::Contact(Contact & contact)
 }
 
 
-void Contact::setName(QString name)
+void Contact::setName(std::string name)
 {
 	if (this->isNull())
 	{
@@ -177,7 +176,7 @@ void Contact::setName(QString name)
 	}
 
 }
-void Contact::setUri(QString uri)
+void Contact::setUri(std::string uri)
 {
 	*this->uri_ = uri;
 }

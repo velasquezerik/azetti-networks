@@ -5,12 +5,12 @@
 #include <QtTest/QtTest>
 #include "user.h"
 
-QString empty = "";
-QString uriAlice = "sip:alice@example.com";
-QString uriBob = "sip:bob@example.com";
-QString bob = "Bob";
-QString alice = "Alice";
-QString robert = "Robert";
+std::string empty = "";
+std::string uriAlice = "sip:alice@example.com";
+std::string uriBob = "sip:bob@example.com";
+std::string bob = "Bob";
+std::string alice = "Alice";
+std::string robert = "Robert";
 
 class TestUser : public QObject
 {
